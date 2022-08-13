@@ -1,16 +1,21 @@
-export const App = () => {
+import { useState } from 'react';
+import ImageGallery from './ImageGallery/ImageGallery';
+import Searchbar from './Searchbar/Searchbar';
+import s from './App.module.css';
+
+const App = () => {
+  const [searchInput, setSearchInput] = useState('');
+
+  const updateSearchInput = searchInput => {
+    setSearchInput(searchInput);
+  };
+
   return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101'
-      }}
-    >
-      React homework template
+    <div className={s.App}>
+      <Searchbar updateSearchInput={updateSearchInput} />
+      <ImageGallery searchInput={searchInput} />
     </div>
   );
 };
+
+export default App;
