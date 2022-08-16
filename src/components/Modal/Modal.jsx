@@ -1,5 +1,4 @@
 import { createPortal } from 'react-dom';
-
 import s from './Modal.module.css';
 
 const modalContainer = document.getElementById('modal');

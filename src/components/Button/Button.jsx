@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import s from './Button.module.css';
 
 const Button = ({ cbOnClick }) => {
@@ -7,10 +6,6 @@ const Button = ({ cbOnClick }) => {
       Load more
     </button>
   );
-};
-
-Button.prototype = {
-  onNextFetch: PropTypes.func.isRequired,
 };
 
 export default Button;
