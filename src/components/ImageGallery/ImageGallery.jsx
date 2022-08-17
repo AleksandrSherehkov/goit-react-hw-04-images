@@ -17,6 +17,7 @@ const ImageGallery = ({ setModalInfo, searchInput }) => {
 
   useEffect(() => {
     if (!searchInput) return;
+    setPage(1);
     const setSearchFotos = () => {
       setIsLoading(true);
       getSearchFotos(page, searchInput)
@@ -28,7 +29,25 @@ const ImageGallery = ({ setModalInfo, searchInput }) => {
         .finally(() => setIsLoading(false));
     };
     setSearchFotos();
-  }, [page, searchInput]);
+    // eslint-disable-next-line
+  }, [searchInput]);
+
+  useEffect(() => {
+    if (!searchInput) return;
+
+    const setSearchFotos = () => {
+      setIsLoading(true);
+      getSearchFotos(page, searchInput)
+        .then(({ hits, total }) => {
+          setFotos(fotos => (page === 1 ? hits : [...fotos, ...hits]));
+          page === 1 && setTotal(total);
+        })
+        .catch(err => console.log(err))
+        .finally(() => setIsLoading(false));
+    };
+    setSearchFotos();
+    // eslint-disable-next-line
+  }, [page]);
 
   return (
     <>
