@@ -17,18 +17,22 @@ const ImageGallery = ({ setModalInfo, searchInput }) => {
 
   useEffect(() => {
     if (!searchInput) return;
-    setPage(1);
-    const setSearchFotos = () => {
-      setIsLoading(true);
-      getSearchFotos(page, searchInput)
-        .then(({ hits, total }) => {
-          setFotos(fotos => (page === 1 ? hits : [...fotos, ...hits]));
-          page === 1 && setTotal(total);
-        })
-        .catch(err => console.log(err))
-        .finally(() => setIsLoading(false));
-    };
-    setSearchFotos();
+    if (page === 1) {
+      const setSearchFotos = () => {
+        setIsLoading(true);
+        getSearchFotos(page, searchInput)
+          .then(({ hits, total }) => {
+            setFotos(fotos => (page === 1 ? hits : [...fotos, ...hits]));
+            page === 1 && setTotal(total);
+          })
+          .catch(err => console.log(err))
+          .finally(() => setIsLoading(false));
+      };
+      setSearchFotos();
+    } else {
+      setPage(1);
+    }
+
     // eslint-disable-next-line
   }, [searchInput]);
 
